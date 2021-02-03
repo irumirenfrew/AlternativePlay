@@ -10,6 +10,8 @@ namespace AlternativePlay
         private SaberManager saberManager;
         private bool useLeftHandForward;
 
+        public float handleLength = 1.45f;
+
         /// <summary>
         /// To be invoked every time when starting the GameCore scene.
         /// </summary>
@@ -133,9 +135,6 @@ namespace AlternativePlay
         /// </summary>
         private void TransformForTwoControllerSpear()
         {
-            const float handleLength = 0.75f;
-            const float handleLengthSquared = 0.5625f;
-
             // Determine the forward hand
             if (Configuration.instance.ConfigurationData.UseTriggerToSwitchHands)
             {
@@ -152,7 +151,7 @@ namespace AlternativePlay
             // Determine final saber position
             Vector3 saberPosition;
             float handSeparationSquared = (forwardHand.position - rearHand.position).sqrMagnitude;
-            if (handSeparationSquared > handleLengthSquared)
+            if (handSeparationSquared > handleLength * handleLength)
             {
                 // Clamp the saber at the extent of the forward hand
                 saberPosition = forwardHand.position;
